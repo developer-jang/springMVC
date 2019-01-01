@@ -1,6 +1,6 @@
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-        layout:decorate="~{/layout/layout1}">
+        layout:decorate="~{layout/layout1}">
 
 <div layout:fragment="content">
 
@@ -11,6 +11,11 @@
 
 </div>
 
+<!--
+<div class="panel panel-default" layout:fragment="content"></div>
+해당 부분과 연관 layout:fragment
+-->
+
 <th:block layout:fragment="script">
     <script th:inline="javascript">
 
@@ -19,6 +24,3 @@
 
 </th:block>
 </html>
-<!--
-org.thymeleaf.exceptions.TemplateInputException: Error resolving template [boards/list], template might not exist or might not be accessible by any of the configured Template Resolvers
--->
