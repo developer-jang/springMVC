@@ -13,6 +13,25 @@
             </ul>
 
         </div>
+
+
+        <div>
+            <ul class="list-group">
+                <li class="list-group-item" th:each="board:${result2.result}">[[${board}]]</li>
+            </ul>
+
+        </div>
+        <!--
+        Could not parse as expression: "result2=${result2.result}" (template: "boards/list" - line 25, col 14)
+        -->
+        <!--<p>${result2}</p>-->
+        <div th:width="result2=${result2.result}">
+            <!--<ul class="list-group">-->
+                <!--<li class="list-group-item" th:each="board:${result.content}">[[${board}]]</li>-->
+            <!--</ul>-->
+
+        </div>
+
     </div>
 
 </div>

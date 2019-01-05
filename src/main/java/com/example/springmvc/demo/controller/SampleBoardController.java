@@ -2,6 +2,7 @@ package com.example.springmvc.demo.controller;
 
 import com.example.springmvc.demo.domain.Board;
 import com.example.springmvc.demo.repository.BoardRepository;
+import com.example.springmvc.demo.vo.PageMakerVO;
 import com.example.springmvc.demo.vo.PageVO;
 import com.querydsl.core.types.Predicate;
 import lombok.extern.java.Log;
@@ -33,6 +34,7 @@ public class SampleBoardController {
 
         Predicate searchPredicate = boardRepository.makePredicate(null, null);
         Page<Board> boardPage = boardRepository.findAll(searchPredicate, pageable);
+
 ///*
 //
 // Using ASTQueryTranslatorFactory
@@ -42,5 +44,6 @@ public class SampleBoardController {
 //
 // */
         model.addAttribute("result", boardPage);
+        model.addAttribute("result2", new PageMakerVO(boardPage));
     }
 }
