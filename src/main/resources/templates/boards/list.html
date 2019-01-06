@@ -6,14 +6,13 @@
 
     <div class="panel-heading">List Page</div>
     <div class="panel-body">
-        <p>[[${result}]]</p>
-        <div>
-            <ul class="list-group">
-                <li class="list-group-item" th:each="board:${result.content}">[[${board}]]</li>
-            </ul>
-
-        </div>
-
+        <!--<p>[[${result}]]</p>-->
+        <!--<div>-->
+            <!--<ul class="list-group">-->
+                <!--<li class="list-group-item" th:each="board:${result.content}">[[${board}]]</li>-->
+            <!--</ul>-->
+<!---->
+        <!--</div>-->
 
         <!--<div>-->
             <!--<ul class="list-group">-->
@@ -33,6 +32,18 @@
 
     </div>
 
+    <!-- Paging -->
+    <nav>
+        <div>
+            <ul class="pagination">
+                <li th:each="p:${result2.pageList}">
+                    <!--[[${p}]]-->
+                    <a href="#">[[${p.pageNumber} + 1]]</a>
+                </li>
+
+            </ul>
+        </div>
+    </nav>
 </div>
 
 <!--
