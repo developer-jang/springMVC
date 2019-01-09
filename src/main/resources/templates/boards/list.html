@@ -25,6 +25,16 @@
                     </tr>
                 </tbody>
             </table>
+
+            <!-- Search -->
+            <div>
+                <select id="searchType">
+                    <option value="t" th:selected="${pageVO.type} == 't'">Title</option>
+                    <option value="c" th:selected="${pageVO.type} == 'c'">Content</option>
+                    <option value="w" th:selected="${pageVO.type} == 'w'">Writer</option>
+                </select>
+                <input type="text" id="searchKeyword"><button id="searchBtn">Search</button>
+            </div>
             <!--<ul class="list-group">-->
                 <!--<li class="list-group-item" th:each="board:${result.content}">[[${board}]]</li>-->
             <!--</ul>-->
@@ -59,6 +69,8 @@
     <form id='form1' th:action="@{list}" method="get">
         <input type="hidden" name="page" th:value="${result2.currentPageNumber}"/>
         <input type="hidden" name="size" th:value="${result2.currentPage.pageSize}"/>
+        <input type="hidden" name="type" th:value="${pageVO.type}">
+        <input type="hidden" name="keyword" th:value="${pageVO.keyword}">
     </form>
 
 </div>
@@ -77,6 +89,17 @@
                formObj.find('[name="page"]').val($(this).attr('href'));
                formObj.submit();
            });
+
+           $("#searchBtn").click(function(e) {
+                e.preventDefault();
+                var type = $("#searchType").find(":selected").val();
+                var keyword = $("#searchKeyword").val();
+
+               formObj.find('[name="type"]').val(type);
+               formObj.find('[name="keyword"]').val(keyword);
+               formObj.find('[name="page"]').val("1");
+               formObj.submit();
+           })
         });
     </script>
 

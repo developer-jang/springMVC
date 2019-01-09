@@ -8,7 +8,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 
 @Getter
-//@Setter
+@Setter
 public class PageVO {
 
     private static final int DEFAULT_SIZE = 10;
@@ -17,6 +17,10 @@ public class PageVO {
     private int page;
 
     private int size;
+
+    private String type;
+
+    private String keyword;
 
     public PageVO() {
         this.page = 1;
