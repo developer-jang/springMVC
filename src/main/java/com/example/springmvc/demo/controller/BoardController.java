@@ -48,4 +48,47 @@ public class BoardController {
         redirectAttributes.addFlashAttribute("msg", "success");
         return "redirect:/boards/list";
     }
+
+    @GetMapping("/view")
+    public void view(Long bno, @ModelAttribute("pageVO") PageVO pageVO, Model model) {
+        boardRepository.findById(bno).ifPresent(board -> model.addAttribute("vo", board));
+    }
+
+    @GetMapping("/modify")
+    public void modify(Long bno, @ModelAttribute("pageVO") PageVO pageVO, Model model) {
+        boardRepository.findById(bno).ifPresent(board -> model.addAttribute("vo", board));
+    }
+
+    @PostMapping("/modify")
+    public String modifyPost(Board board, PageVO pageVO, RedirectAttributes redirectAttributes) {
+        boardRepository.findById(board.getBno()).ifPresent(origin -> {
+            origin.setTitle(board.getTitle());
+            origin.setContent(board.getContent());
+            boardRepository.save(origin);
+            redirectAttributes.addFlashAttribute("msg", "success");
+            redirectAttributes.addFlashAttribute("bno", origin.getBno());
+        });
+        redirectAttributes.addAttribute("page", pageVO.getPage());
+        redirectAttributes.addAttribute("size", pageVO.getSize());
+        redirectAttributes.addAttribute("type", pageVO.getType());
+        redirectAttributes.addAttribute("keyword", pageVO.getKeyword());
+        return "redirect:/boards/view";
+    }
+
+    @PostMapping("/delete")
+    public String delete(Long bno, PageVO pageVO, RedirectAttributes redirectAttributes) {
+
+        /*
+         * RedirectAttributes의 필요성
+         * rediect:${원하는 페이지주소}로 화면을 돌리면되나, 데이터를 넘겨주어야 할떄, addFlashAttribute를 사용한다.
+         * */
+        boardRepository.deleteById(bno);
+        redirectAttributes.addFlashAttribute("msg", "success");
+        redirectAttributes.addFlashAttribute("page", pageVO.getPage());
+        redirectAttributes.addFlashAttribute("size", pageVO.getSize());
+        redirectAttributes.addFlashAttribute("type", pageVO.getType());
+        redirectAttributes.addFlashAttribute("keyword", pageVO.getKeyword());
+
+        return "redirect:/boars/list";
+    }
 }
