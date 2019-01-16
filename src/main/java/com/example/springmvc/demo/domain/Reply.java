@@ -9,32 +9,29 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
-import java.util.Set;
 
+@Table(name = "reply")
+@ToString(exclude = "board")
+@Entity
 @Getter
 @Setter
-@Table(name = "board")
-@Entity
-@ToString(exclude = "replies")
-@EqualsAndHashCode(of = "bno")
-public class Board {
+@EqualsAndHashCode(of = "rno")
+public class Reply {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long bno;
+    private Long rno;
 
-    private String title;
+    private String replyText;
 
-    private String writer;
-
-    private String content;
+    private String replyer;
 
     @CreationTimestamp
     private Timestamp regDt;
 
     @UpdateTimestamp
-    private Timestamp upDt;
+    private Timestamp updatedDt;
 
-    @OneToMany(mappedBy = "board")
-    private Set<Reply> replies;
+    @ManyToOne
+    private Board board;
 }

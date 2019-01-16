@@ -1,0 +1,13 @@
+Get 방식 - 정보를 보여주거나 알리는 방식(확산)
+Post 방식 - 정보의 가공
+
+
+GET - 조회
+POST - 저장
+PUT - 수정
+DELETE - 삭제
+
+@RequestBody - 클라이언트가 JSON을 보낼 때 받기 위해
+@ResponseBody - 클라이언트에게 전송되는 형식에 맞게
+@PathVariable - URL의 경로에 포함된 정보 추출 /{userId}
+@RestController - @Controller, @ResponseBody를 기본으로 제공
