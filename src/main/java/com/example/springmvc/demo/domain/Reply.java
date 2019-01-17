@@ -1,5 +1,6 @@
 package com.example.springmvc.demo.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -32,6 +33,7 @@ public class Reply {
     @UpdateTimestamp
     private Timestamp updatedDt;
 
+    @JsonIgnore
     @ManyToOne
     private Board board;
 }
