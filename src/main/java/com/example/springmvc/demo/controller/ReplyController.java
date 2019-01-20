@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,6 +32,31 @@ public class ReplyController {
 
     private List<Reply> getReplyListByBno(Board board) {
 //        return replyRepository.fin
+        return new ArrayList<>();
+    }
+
+    @Transactional
+    @DeleteMapping("/{bno}/{rno}")
+    public ResponseEntity<List<Reply>> remove(@PathVariable("bno") Long bno, @PathVariable("rno") Long rno) {
+        replyRepository.deleteById(rno);
+        Board board = new Board();
+        board.setBno(bno);
+        return new ResponseEntity<>(getListByBoard(board), HttpStatus.OK);
+    }
+
+    @Transactional
+    @PutMapping("/{bno}")
+    public ResponseEntity<List<Reply>> modify(@PathVariable("bno") Long bno, @RequestBody Reply reply) {
+        replyRepository.findById(reply.getRno()).ifPresent(origin -> {
+            origin.setReplyText(reply.getReplyText());
+            replyRepository.save(origin);
+        });
+        Board board = new Board();
+        board.setBno(bno);
+        return new ResponseEntity<>(getListByBoard(board), HttpStatus.CREATED);
+    }
+
+    private List<Reply> getListByBoard(Board board) {
         return new ArrayList<>();
     }
 }

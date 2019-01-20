@@ -11,3 +11,13 @@ DELETE - 삭제
 @ResponseBody - 클라이언트에게 전송되는 형식에 맞게
 @PathVariable - URL의 경로에 포함된 정보 추출 /{userId}
 @RestController - @Controller, @ResponseBody를 기본으로 제공
+
+---------------------------------------------------
+
+@Query의 한계
+- 동적으로 변화가 어려움.(특정 컬럼만 초이스, JPQL의 내용이 고정된다.)
+--> 따라서, 사용자 정의 인터페이스를 설계한다.
+
+ex. CustomCrudRepositoryImpl.java
+
+사용자 정의  쿼리는 JPQL을 유연하게 사용함
